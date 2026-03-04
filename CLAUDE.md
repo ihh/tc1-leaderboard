@@ -346,6 +346,7 @@ When asked to work on this project, Claude should:
 1. **Respect the entry format specification exactly.** The annotation characters, file names, and column definitions are a contract. Do not deviate.
 2. **Write validation code that is strict on format, informative on failure.** Error messages should tell the submitter exactly what is wrong and where (sequence ID, column number, expected vs. actual).
 3. **Keep scoring logic in `ci/checks/scoring.py` as a standalone module** with clear, documented weight parameters that can be tuned.
-4. **Write tests.** The `ci/` directory should include test fixtures (minimal valid and invalid entries) and pytest-based tests for every check.
-5. **Design for reuse.** The Stockholm parser, annotation validator, and protein/DNA consistency checks will be reused for the big data leaderboard. Keep them modular and dependency-light.
-6. **Do not over-engineer.** This is a research tool, not a production service. Clarity and correctness over abstraction.
+4. **Maintain a clear policy document POLICY.md at the top level, describing the scoring scheme and hard/soft constraints.** The scoring scheme and validation may change, but the current policy should always be transparent.
+5. **Write tests.** The `ci/` directory should include test fixtures (minimal valid and invalid entries) and pytest-based tests for every check.
+6. **Design for reuse.** The Stockholm parser, annotation validator, and protein/DNA consistency checks will be reused for the big data leaderboard. Keep them modular and dependency-light.
+7. **Do not over-engineer.** This is a research tool, not a production service. Clarity and correctness over abstraction.
