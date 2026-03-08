@@ -1,12 +1,12 @@
 {
-  "updated": "2026-03-08T17:10:34.102712+00:00",
+  "updated": "2026-03-08T21:38:54.957636+00:00",
   "entries": [
     {
       "team": "test-entry",
       "score": 31.5,
       "n_sequences": 3,
       "n_families": 1,
-      "commit": "test123",
+      "commit": "954249c",
       "scores": {
         "diversity": 0.0554,
         "annotation": 1.0,
