@@ -115,6 +115,37 @@ tbody tr:hover { background: var(--accent-subtle); }
 .status-fail { color: var(--red); }
 .issue-list { list-style: disc; margin-left: 1.5rem; color: var(--text-muted); }
 
+/* Alignment viewer */
+.alignment { margin-top: 1rem; }
+.alignment h3 { font-size: 0.9rem; margin-bottom: 0.5rem; color: var(--text-muted); }
+.aln-legend {
+  font-size: 0.75rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.aln-block {
+  font-family: "SF Mono", "Menlo", "Monaco", "Consolas", monospace;
+  font-size: 0.7rem;
+  line-height: 1.35;
+  overflow-x: auto;
+  padding: 0.75rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+.aln-label { color: var(--text-muted); }
+.aa-hydrophobic { color: #6cb4ee; }
+.aa-positive { color: #f47067; }
+.aa-negative { color: #d2a8ff; }
+.aa-polar { color: #7ee787; }
+.aa-cysteine { color: #e3b341; }
+.aa-glycine { color: #56d4dd; }
+.aa-proline { color: #f0b72f; font-weight: 700; }
+.aa-aromatic { color: #79dafa; font-weight: 700; }
+.aa-triad { color: #fff; background: #da3633; border-radius: 2px; padding: 0 1px; font-weight: 700; }
+
 .empty-state {
   text-align: center;
   padding: 4rem 1rem;

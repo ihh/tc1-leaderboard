@@ -42,6 +42,86 @@
     return tr;
   }
 
+  // Residue coloring by physicochemical property
+  const AA_CLASSES = {};
+  "AILMFWV".split("").forEach(c => AA_CLASSES[c] = "aa-hydrophobic");
+  "KR".split("").forEach(c => AA_CLASSES[c] = "aa-positive");
+  "DE".split("").forEach(c => AA_CLASSES[c] = "aa-negative");
+  "NQST".split("").forEach(c => AA_CLASSES[c] = "aa-polar");
+  "C".split("").forEach(c => AA_CLASSES[c] = "aa-cysteine");
+  "G".split("").forEach(c => AA_CLASSES[c] = "aa-glycine");
+  "P".split("").forEach(c => AA_CLASSES[c] = "aa-proline");
+  "HY".split("").forEach(c => AA_CLASSES[c] = "aa-aromatic");
+
+  function renderAlignment(alignment) {
+    if (!alignment || !alignment.sequences) return "";
+
+    const ids = Object.keys(alignment.sequences);
+    const seqs = Object.values(alignment.sequences);
+    const triad = alignment.catalytic_triad || "";
+    const len = seqs[0].length;
+    const BLOCK = 80;
+    const pad = Math.max(...ids.map(s => s.length));
+
+    let html = '<div class="alignment"><h3>Protein alignment</h3>';
+    html += '<div class="aln-legend">';
+    html += '<span class="aa-hydrophobic">hydrophobic</span> ';
+    html += '<span class="aa-positive">positive</span> ';
+    html += '<span class="aa-negative">negative</span> ';
+    html += '<span class="aa-polar">polar</span> ';
+    html += '<span class="aa-cysteine">cysteine</span> ';
+    html += '<span class="aa-glycine">glycine</span> ';
+    html += '<span class="aa-aromatic">aromatic</span> ';
+    html += '<span class="aa-triad">triad</span>';
+    html += '</div><pre class="aln-block">';
+
+    for (let start = 0; start < len; start += BLOCK) {
+      const end = Math.min(start + BLOCK, len);
+
+      // Sequence rows
+      for (let s = 0; s < ids.length; s++) {
+        const label = ids[s].padEnd(pad + 2);
+        let row = `<span class="aln-label">${label}</span>`;
+        for (let i = start; i < end; i++) {
+          const aa = seqs[s][i];
+          const isTriad = triad[i] && "DdE".includes(triad[i]);
+          const cls = isTriad ? "aa-triad" : (AA_CLASSES[aa] || "");
+          row += cls ? `<span class="${cls}">${aa}</span>` : aa;
+        }
+        html += row + "\n";
+      }
+
+      // Triad annotation row
+      let triadRow = " ".repeat(pad + 2);
+      for (let i = start; i < end; i++) {
+        const ch = triad[i] || ".";
+        if ("DdE".includes(ch)) {
+          triadRow += `<span class="aa-triad">${ch}</span>`;
+        } else {
+          triadRow += " ";
+        }
+      }
+      html += triadRow + "\n";
+
+      // Conservation row
+      let consRow = " ".repeat(pad + 2);
+      for (let i = start; i < end; i++) {
+        const col = seqs.map(s => s[i]);
+        const unique = new Set(col);
+        if (unique.size === 1) consRow += "*";
+        else if (col.every(r => "AILMFWV".includes(r))) consRow += ":";
+        else if (col.every(r => "DE".includes(r))) consRow += ":";
+        else if (col.every(r => "KR".includes(r))) consRow += ":";
+        else if (col.every(r => "NQST".includes(r))) consRow += ":";
+        else consRow += " ";
+      }
+      html += consRow + "\n\n";
+    }
+
+    html += "</pre></div>";
+    return html;
+  }
+
   function buildDetailRow(teamData) {
     const tr = document.createElement("tr");
     tr.className = "detail-row";
@@ -75,7 +155,9 @@
       }
     }
 
-    td.innerHTML = `<div class="detail-panel">${checksHTML}${issuesHTML}</div>`;
+    const alignmentHTML = renderAlignment(teamData.alignment);
+
+    td.innerHTML = `<div class="detail-panel">${checksHTML}${issuesHTML}${alignmentHTML}</div>`;
     tr.appendChild(td);
     tr.style.display = "none";
     return tr;

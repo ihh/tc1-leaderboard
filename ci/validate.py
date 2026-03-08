@@ -155,7 +155,17 @@ def _build_report(
             "functionality": 0.0, "size": 0.0, "total": 0.0,
         }
 
-    return {
+    # Embed alignment data for the web viewer
+    alignment = None
+    if protein_block is not None:
+        alignment = {
+            "sequences": {
+                sid: seq for sid, seq in protein_block.sequences.items()
+            },
+            "catalytic_triad": protein_block.gc.get("catalytic_triad", ""),
+        }
+
+    report = {
         "team": team,
         "timestamp": datetime.now(timezone.utc).isoformat(),
         "commit": commit,
@@ -165,6 +175,9 @@ def _build_report(
         "scores": scores,
         "per_sequence_issues": per_seq_issues,
     }
+    if alignment:
+        report["alignment"] = alignment
+    return report
 
 
 def update_leaderboard(scores_dir: Path, output_path: Path) -> None:
