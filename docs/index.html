@@ -33,7 +33,17 @@
   </table>
 
   <section class="how-to-submit">
-    <h2>How to submit</h2>
+    <h2>Quick start</h2>
+    <p>The easiest way to submit is with the <code>submit.py</code> script:</p>
+    <pre class="code-block"><code>pip install -r ci/requirements.txt
+python submit.py                     # auto-detects entries/{your-username}/
+python submit.py entries/my-team     # or specify explicitly
+python submit.py --no-pr             # validate locally only</code></pre>
+    <p>
+      The script validates your entry locally (with a detailed score report),
+      creates a PR, waits for CI, and reports pass/fail with feedback.
+    </p>
+    <h2>Manual submission</h2>
     <ol>
       <li><strong>Fork</strong> this repo.</li>
       <li>Create <code>entries/{your-github-username}/</code> with three files:

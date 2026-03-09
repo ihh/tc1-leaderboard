@@ -8,7 +8,36 @@ This is Stage 1 of a project to train a DNA language model on the ITm transposon
 
 Teams submit curated entries. A CI pipeline validates each submission and assigns a score. The leaderboard ranks all submissions.
 
-## How to submit
+## Quick start
+
+The easiest way to submit is with the included `submit.py` script, which validates locally, creates a PR, and monitors CI:
+
+```bash
+# Install dependencies
+pip install -r ci/requirements.txt
+
+# Validate and submit (auto-detects entries/{your-github-username}/)
+python submit.py
+
+# Or specify your entry explicitly
+python submit.py entries/my-team
+```
+
+The script will:
+1. Run all validation checks locally and show a detailed score report
+2. Create a branch and PR for your entry
+3. Wait for CI checks to pass and report the result
+
+Additional options:
+```bash
+python submit.py --no-pr       # Validate locally only, don't create a PR
+python submit.py --no-wait     # Create PR but don't wait for CI
+python submit.py --timeout 600 # Wait up to 10 minutes for CI (default: 5 min)
+```
+
+## How to submit (manual)
+
+If you prefer to submit manually:
 
 1. **Fork this repo.**
 2. Create a directory `entries/{your-github-username}/` containing:
@@ -47,15 +76,6 @@ Hard-fail checks (format errors, annotation inconsistencies) result in a score o
 Scores are also available as JSON:
 - `leaderboard.json` — ranked summary
 - `scores/{team}.json` — detailed per-team results
-
-## Local validation
-
-Test your entry locally before opening a PR:
-
-```bash
-pip install -r ci/requirements.txt
-python ci/validate.py --entry entries/your-github-username/
-```
 
 ## Entry format summary
 
