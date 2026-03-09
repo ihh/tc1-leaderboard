@@ -1,20 +1,6 @@
 {
-  "updated": "2026-03-09T00:46:07.293326+00:00",
+  "updated": "2026-03-09T00:59:35.694353+00:00",
   "entries": [
-    {
-      "team": "ihh",
-      "score": 31.5,
-      "n_sequences": 3,
-      "n_families": 1,
-      "commit": "dffe4a1",
-      "scores": {
-        "diversity": 0.0554,
-        "annotation": 1.0,
-        "functionality": 0.0167,
-        "size": 0.2642,
-        "total": 31.5
-      }
-    },
     {
       "team": "test-entry",
       "score": 31.5,

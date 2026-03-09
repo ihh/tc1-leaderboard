@@ -1,4 +1,0 @@
-id	family	host_species	host_taxid	assembly	chrom	start	end	strand	source	reference
-Mos1_Dmaur	DD34D_mariner	Drosophila mauritiana	7225	GCF_004382145.1	scaffold_1	1050000	1051590	+	literature	10.1073/pnas.83.22.8684
-SynMar1_Dpse	DD34D_mariner	Drosophila pseudoobscura	7237	GCF_009870125.1	chr2	5200000	5201590	+	BLASTp	
-SynMar2_Agam	DD34D_mariner	Anopheles gambiae	7165	GCF_943734735.2	chr3	8100000	8101590	-	BLASTp	
