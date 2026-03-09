@@ -71,7 +71,7 @@ Hard-fail checks (format errors, annotation inconsistencies) result in a score o
 
 ## Leaderboard
 
-**[View the live leaderboard](https://ihh.github.io/tc1-leaderboard/)**
+**[View the live leaderboard](https://evoldoers.github.io/tc1-leaderboard/)**
 
 Scores are also available as JSON:
 - `leaderboard.json` — ranked summary
